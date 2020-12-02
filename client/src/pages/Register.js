@@ -12,6 +12,7 @@ import { useMutation } from '@apollo/react-hooks';
 import {AuthContext} from '../context/auth';
 import { useForm } from '../util/hooks';
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -51,7 +52,9 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   const font =  "'Merriweather', serif";
-  function Register (props){
+  function Register (props) {
+
+    const context = useContext(AuthContext);
     const authContext = useContext(AuthContext);
     const [errors, setErrors] = useState({});
     
@@ -63,8 +66,8 @@ const useStyles = makeStyles((theme) => ({
       });
 
 const [addUser, { loading }] = useMutation(REGISTER_USER, {
-    update(_, result){
-        console.log(result);
+  update(_, { data: { register: userData }}){
+        context.login(userData);
         props.history.push('/');
     },
     onError(err){

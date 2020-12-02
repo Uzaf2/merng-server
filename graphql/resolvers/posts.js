@@ -23,7 +23,7 @@ module.exports = {
         async getPosts()
         {
             try {
-                const posts = await Post.find();
+                const posts = await Post.find().sort({creationTime: -1});
                 return posts;
             }
             catch (err)
@@ -42,7 +42,7 @@ module.exports = {
         }
         const newPost = new Post ({
             body,
-            id: userObj.id,
+            user: userObj.id,
             username: userObj.username,
             creationTime:  new Date().toISOString()
         })

@@ -1,9 +1,9 @@
 const { model, Schema} = require('mongoose');
 
 const postSchema = new Schema({
+    body: String,
     username: String,
     creationTime: String,
-    body: String,
     likes:[{
         username: String,
         creationTime: String

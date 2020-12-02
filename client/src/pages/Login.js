@@ -10,6 +10,7 @@ import Container from '@material-ui/core/Container';
 import  gql  from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { useForm } from '../util/hooks';
+import { AuthContext } from '../context/auth';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,10 +52,10 @@ const useStyles = makeStyles((theme) => ({
 
   const font =  "'Merriweather', serif";
   
-  function Login (props){
+  function Login (props) {
 
-    
-    const [errors, setErrors] = useState({});
+    const context = useContext (AuthContext);
+    const [ errors, setErrors ] = useState ({});
     
     const { onChange, onSubmit, values } = useForm(loginUserCallback, {
         username: '',
@@ -62,11 +63,13 @@ const useStyles = makeStyles((theme) => ({
       });
     
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-        update(_, result){
-        console.log(result);
+        update(_, { data: { login: userData }}){
+        console.log("In update function", userData);
+        context.login(userData);
         props.history.push('/');
         },
         onError(err){
+        console.log("errors called", err)
            setErrors(err.graphQLErrors[0].extensions.exception.errors);
         },
         variables: values
@@ -124,7 +127,7 @@ const useStyles = makeStyles((theme) => ({
                         style={{ marginTop : "10px" }}
                     >
                     <Typography component="h1" variant="h5" className={styles.fontType}>
-                    Sign Up
+                    Login
                     </Typography>
                     </Button>
                 </form>
