@@ -63,7 +63,7 @@ function MenuBar (){
           {user.username}
         </Typography>
         </Button>
-        <Button color="default" onClick={logout} align="right">
+        <Button color="default" position="right" onClick={logout} >
         <Typography variant="h6" className={classes.introText}>Logout</Typography> 
         </Button>
       </Toolbar>
@@ -93,7 +93,6 @@ function MenuBar (){
       </Toolbar>
     </AppBar>
       );
-    
         return menuBar;
 }
 

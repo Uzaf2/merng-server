@@ -54,6 +54,7 @@ type Mutation {
     createComment(postId: String!,body: String!): Post !
     deleteComment(postId:ID!, commentId:ID!): Post !
     likeAndUnlikePost(postId:ID!): Post !
+    likePost(postId:ID!): Post!
 }
 
 type Subscription {

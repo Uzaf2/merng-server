@@ -36,7 +36,7 @@ module.exports = {
        async createPost(_, {body},context) {
        const userObj = authorization(context);
        
-        if( body.trim ==="" )
+        if( body.trim() ==="" )
         {
             throw new Error("The body cannot be empty");
         }
@@ -70,7 +70,27 @@ module.exports = {
         {
             throw new Error (" Exception occured in finding the post", err);
         }
-    }
+    },
+    async likePost(_, { postId }, context) {
+        const { username } = authorization(context);
+  
+        const post = await Post.findById(postId);
+        if (post) {
+          if (post.likes.find((like) => like.username === username)) {
+            // Post already likes, unlike it
+            post.likes = post.likes.filter((like) => like.username !== username);
+          } else {
+            // Not liked, like post
+            post.likes.push({
+              username,
+              createdAt: new Date().toISOString()
+            });
+          }
+  
+          await post.save();
+          return post;
+        } else throw new UserInputError('Post not found');
+      }
     },
     Subscription : {
         newPost: {

@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useEffect } from 'react';
 import { useForm } from '../util/hooks';
 import { useMutation } from '@apollo/react-hooks';
 import Button from '@material-ui/core/Button';
@@ -12,16 +12,19 @@ function PostForm() {
         body: ''
     });
 
-    const [createPost, {error}] = useMutation ( CREATE_POST_MUTATION, {
-        variables: values, 
-        update(proxy, result)   {
-            const data = proxy.readQuery({ query: FETCH_POSTS_QUERY });
-           proxy.writeQuery({ query: FETCH_POSTS_QUERY, data: {
-            getPosts: [result.data.createPost, ...data.getPosts],
-          }, });
-            values.body = '';
+        const [createPost, {error}] = useMutation ( CREATE_POST_MUTATION, {
+            variables: values, 
+
+        update(proxy, result)   
+        {
+        console.log("error", error);
+        const data = proxy.readQuery({ query: FETCH_POSTS_QUERY });
+        proxy.writeQuery({ query: FETCH_POSTS_QUERY, data: {
+        getPosts: [result.data.createPost, ...data.getPosts], }, });
+        values.body = '';
         }
     });
+    
 
     function createPostCallBack (){
         createPost();
@@ -42,7 +45,7 @@ function PostForm() {
         Submit
         </Button>
         </form>
-    )
+    );
 }
 
 const CREATE_POST_MUTATION = gql`

@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import {Image} from 'semantic-ui-react';
 import moment from 'moment';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CommentIcon from '@material-ui/icons/Comment';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import {makeStyles }from '@material-ui/core/styles';
+import { AuthContext } from '../context/auth';
+import { useHistory } from 'react-router-dom';
+import LikeButton from './LikeButton';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const font =  "'Merriweather', serif";
 
@@ -46,9 +50,22 @@ const useStyles = makeStyles({
       }
 });
 
+
+const useStyles2 = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
+
+
 function PostCard(props){
+  const history = useHistory();
+  const { user } = useContext(AuthContext);
 
   const styles = useStyles();
+  const classes = useStyles2();
+
+  console.log("props id", props.id);
   return (
   
 <Card className={styles.gridContainer}>
@@ -70,12 +87,21 @@ function PostCard(props){
  </CardContent>
 </CardActionArea>
 <CardActions className={styles.cardActions}>
- <Button size="small" >
- <FavoriteIcon className={styles.iconActions}/>
+
+ <LikeButton  user={user} postId={ props.id} likes={props.likes} likesCount={props.likeCount}/>
+ <Button size="small" variant="contained"   className={classes.button} startIcon={<CommentIcon/>} onClick={()=>{
+    history.push(`/posts/${props.id}`)
+ }} >
+    {props.commentCount}
  </Button>
- <Button size="small">
-   <CommentIcon />
- </Button>
+ { user && user.username === props.username &&<Button
+        variant="contained"
+        color="secondary"
+        size = "small"
+        className={classes.button}
+        startIcon={<DeleteIcon />}
+        onClick={()=> console.log("Delete Post")}
+ />}
 </CardActions>
 </Card>
   )
