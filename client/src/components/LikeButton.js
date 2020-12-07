@@ -19,9 +19,8 @@ function LikeButton({user, postId, likes, likesCount}) {
 
     const [liked, setLiked] = useState(false);
 
-    const [color, setColor] = useState('primary');
 
-  const classes = useStyles2();
+   const classes = useStyles2();
 
   useEffect(() => {
     
@@ -38,10 +37,10 @@ function LikeButton({user, postId, likes, likesCount}) {
 
   const likeButton = 
     liked ? (
-      <Button size= "small"  color="white"  startIcon={<FavoriteIcon/>} variant="contained" className={classes.button}>
+      <Button size= "small"  color="primary" startIcon={<FavoriteIcon/>} variant="contained" >
       </Button>
     ) : (
-      <Button size= "small"  color="red"  startIcon={<FavoriteIcon/>} variant="contained" className={classes.button1}>
+      <Button size= "small"  color="secondary"  startIcon={<FavoriteIcon/>} variant="contained" >
       </Button>
     ) ;
 
