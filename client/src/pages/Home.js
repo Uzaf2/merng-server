@@ -38,7 +38,8 @@ function Home() {
                          <PostCard id={data.id} body={data.body} 
                          username={data.username}
                           creationTime={data.creationTime} commentCount={data.commentCount}
-                          likeCount={data.likeCount} />
+                          likeCount={data.likeCount}
+                          likes={data.likes} />
                     </Grid>
                 ))}
                 </TransitionGroup>

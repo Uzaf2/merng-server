@@ -65,6 +65,7 @@ function PostCard(props){
   const styles = useStyles();
   const classes = useStyles2();
 
+  console.log("likes", props.likes)
   console.log("props id", props.id);
   return (
   
