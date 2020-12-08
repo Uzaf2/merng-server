@@ -26,7 +26,6 @@ function LikeButton({user, postId, likes, likesCount}) {
     
         if (user && likes.find((like) => like.username === user.username)) {
             setLiked(true);
-            console.log("liked", liked, "user", user);
           } else setLiked(false);    
   
 }, [user, likes]);

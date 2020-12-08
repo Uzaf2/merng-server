@@ -14,6 +14,7 @@ import { AuthContext } from '../context/auth';
 import { useHistory } from 'react-router-dom';
 import LikeButton from './LikeButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import SinglePost from '../pages/SinglePost';
 
 const font =  "'Merriweather', serif";
 
@@ -89,7 +90,7 @@ function PostCard(props){
 </CardActionArea>
 <CardActions className={styles.cardActions}>
 
- <LikeButton  user={user} postId={ props.id} likes={props.likes} likesCount={props.likeCount}/>
+ <LikeButton  user={user} postId={ props.id } likes={props.likes} likesCount={props.likeCount}/>
  <Button size="small" variant="contained"   className={classes.button} startIcon={<CommentIcon/>} onClick={()=>{
     history.push(`/posts/${props.id}`)
  }} >
