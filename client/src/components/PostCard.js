@@ -15,7 +15,7 @@ import { useHistory } from 'react-router-dom';
 import LikeButton from './LikeButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import SinglePost from '../pages/SinglePost';
-
+import DeletePost from './DeletePost';
 const font =  "'Merriweather', serif";
 
 const useStyles = makeStyles({
@@ -56,6 +56,10 @@ const useStyles2 = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
+  deleteButton: {
+    position: "absolute",
+    right: "750px"
+  }
 }));
 
 
@@ -65,9 +69,6 @@ function PostCard(props){
 
   const styles = useStyles();
   const classes = useStyles2();
-
-  console.log("likes", props.likes)
-  console.log("props id", props.id);
   return (
   
 <Card className={styles.gridContainer}>
@@ -93,16 +94,12 @@ function PostCard(props){
  <LikeButton  user={user} postId={ props.id } likes={props.likes} likesCount={props.likeCount}/>
  <Button size="small" variant="contained"   className={classes.button} startIcon={<CommentIcon/>} onClick={()=>{
     history.push(`/posts/${props.id}`)
- }} >
+ }}>
     {props.commentCount}
  </Button>
- { user && user.username === props.username &&<Button
-        variant="contained"
-        color="secondary"
-        size = "small"
-        className={classes.button}
-        startIcon={<DeleteIcon />}
-        onClick={()=> console.log("Delete Post")}
+ { user && user.username === props.username &&<DeletePost
+        className={classes.deleteButton}
+        postId={props.id}
  />}
 </CardActions>
 </Card>

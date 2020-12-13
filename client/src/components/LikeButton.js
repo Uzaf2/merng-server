@@ -1,11 +1,9 @@
 import React, { useEffect,useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { Link } from 'react-router-dom';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import {makeStyles }from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import CommentIcon from '@material-ui/icons/Comment';
 import MyPopup from '../util/MyPopup';
 
 const useStyles2 = makeStyles((theme) => ({
@@ -17,9 +15,7 @@ const useStyles2 = makeStyles((theme) => ({
 
 function LikeButton({user, postId, likes, likesCount}) {
 
-    const [liked, setLiked] = useState(false);
-
-
+   const [liked, setLiked] = useState(false);
    const classes = useStyles2();
 
   useEffect(() => {
@@ -36,19 +32,17 @@ function LikeButton({user, postId, likes, likesCount}) {
 
   const likeButton = 
     liked ? (
-      <Button size= "small"  color="primary" startIcon={<FavoriteIcon/>} variant="contained" >
+      <Button size= "small"  color="white" startIcon={<FavoriteIcon/>} variant="contained" >
       </Button>
     ) : (
-      <Button size= "small"  color="secondary"  startIcon={<FavoriteIcon/>} variant="contained" >
+      <Button size= "small"  color="white"  startIcon={<FavoriteIcon/>} variant="contained" >
       </Button>
     ) ;
 
   return (
     <Button  as="div" onClick={likePost} >
          <MyPopup content={liked ? 'Unlike' : 'Like'}>{likeButton}</MyPopup>
-         <label>
          {likesCount}
-         </label>
     </Button>
   );
 

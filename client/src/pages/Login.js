@@ -64,12 +64,10 @@ const useStyles = makeStyles((theme) => ({
     
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
         update(_, { data: { login: userData }}){
-        console.log("In update function", userData);
         context.login(userData);
         props.history.push('/');
         },
         onError(err){
-        console.log("errors called", err)
            setErrors(err.graphQLErrors[0].extensions.exception.errors);
         },
         variables: values

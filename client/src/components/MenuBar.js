@@ -36,14 +36,9 @@ function MenuBar (){
   const [activeItem, setActiveItem] = useState('');
   const history = useHistory();
   history.push("/");
- 
-
-  console.log("user", user)
-  console.log('activeItem', activeItem)
   // function to detect changes in the state of the application
   useEffect(() => {
     history.push(`/${activeItem}`);
-    console.log('useEffect called', activeItem)
   });
 
   const classes = useStyles();
