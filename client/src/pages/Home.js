@@ -1,4 +1,4 @@
-import {React, useCallback, useContext } from 'react'
+import { React, useCallback, useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks';
 import PostCard from '../components/PostCard';
 import { FETCH_POSTS_QUERY } from '../util/graphql';
@@ -12,7 +12,7 @@ import PostForm from '../components/PostForm';
 function Home() {
 
     const { user } = useContext(AuthContext);
-    const { loading , data} = useQuery(FETCH_POSTS_QUERY);
+    const { loading , data } = useQuery(FETCH_POSTS_QUERY);
   
     if ( data=== undefined )
     {

@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useHistory } from "react-router-dom";
 import { AuthContext } from '../context/auth';
+import { Link } from 'react-router-dom';
+import '../App.css';
 
 const font =  "'Merriweather', serif";
 const useStyles = makeStyles((theme) => ({
@@ -25,19 +27,27 @@ const useStyles = makeStyles((theme) => ({
   introText: {
     fontFamily: font,
     color: "black",
-    fontSize: 12
+    fontSize: 12,
+    align: "right"
+    },
+    button: {
+      float: "right",
+      position: "relative",
+      justify:"space-between"
     }
-}));
+  }));
 
 
-function MenuBar (){
+function MenuBar () {
   const {user, logout} = useContext(AuthContext);
 
   const [activeItem, setActiveItem] = useState('');
+  console.log("activeItem", activeItem);
   const history = useHistory();
   history.push("/");
   // function to detect changes in the state of the application
   useEffect(() => {
+    console.log("Use effect called");
     history.push(`/${activeItem}`);
   });
 
@@ -52,15 +62,19 @@ function MenuBar (){
          aria-label="menu">
           <MenuIcon />
         </IconButton>
-        <Button color="default" onClick={()=>setActiveItem('') }>
-        <Typography variant="h6" 
-        className={classes.title}>
-          {user.username}
-        </Typography>
+        
+        <Typography variant="h6" className={classes.title}>{user.username}</Typography>
+
+        <Link to="/"  style={{ textDecoration: 'none' }}>
+        <Button color="default">
+        <Typography variant="h6" className={classes.introText}>home</Typography>
         </Button>
-        <Button color="default" position="right" onClick={logout} >
+        </Link>
+
+        <Button color="default" position="right" className= {classes.button} onClick={logout}>
         <Typography variant="h6" className={classes.introText}>Logout</Typography> 
         </Button>
+
       </Toolbar>
     </AppBar>
       ): (

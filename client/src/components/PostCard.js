@@ -72,10 +72,10 @@ function PostCard(props){
   return (
   
 <Card className={styles.gridContainer}>
-<CardActionArea > 
+<CardActionArea> 
 
  <CardContent>
- <Image float="right" size="mini" src='http://semantic-ui.com/images/avatar2/large/molly.png' className={styles.imageSize}/>
+ <Image float="right" size="mini" src='https://react.semantic-ui.com/images/avatar/large/matthew.png'  className={styles.imageSize}/>
    <Typography gutterBottom variant="h5" component="h2">
    </Typography>
    <Typography variant="body2" color="textSecondary" component="p" className={styles.heading}>
