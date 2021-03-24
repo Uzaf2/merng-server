@@ -22,7 +22,7 @@ module.exports = {
     Mutation: {
         async login (_,{username, password})
         {
-            const { errors, valid  }= ValidateLoginInput(username, password);
+            const { errors, valid  } = ValidateLoginInput(username, password);
             if (!valid) {
                 throw new UserInputError('Invalid User Input',{errors});
             }
